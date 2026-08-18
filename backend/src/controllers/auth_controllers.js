@@ -1,12 +1,10 @@
 import { hashPassword, comparePassword, generateToken } from '../constants/utils.js';
-import { PrismaClient } from '@prisma/client';
-import { Role } from '../constants/enums.js';
-
-const prisma = new PrismaClient();
+import prisma from '../lib/prisma.js';
 
 const register = async (req, res) => {
   try {
-    const { name, email, password } = req.body; // role NÃO vem do body
+    const { name, email, password, role } = req.body; 
+    // já foi validado pelo Zod
 
     const hashedPassword = await hashPassword(password);
 
@@ -15,7 +13,7 @@ const register = async (req, res) => {
         name,
         email,
         password: hashedPassword,
-        role: Role.STUDENT, // valor padrão fixo, decidido pelo servidor
+        role, 
       },
     });
 

@@ -10,14 +10,19 @@ const validate = (schema) => async (req, res, next) => {
         message: err.message,
       }));
 
-      return res.status(400).json({
-        error: 'Dados de entrada inválidos.',
-        details: formattedErrors,
-      });
+      if (process.env.MODO_DEV === "DEV") {
+        return res.status(400).json({
+          error: 'Dados de entrada inválidos.',
+          formattedErrors,
+        });
+      } else {
+        return res.status(400).json({
+          error: 'Dados de entrada inválidos.',
+        });
+      }
     }
 
-    return res.status(500).json({ error: 'Erro interno ao validar dados de entrada.' });
-  }
-};
+    return res.status(500).json({ error: 'Erro interno ao validar dados de entrada.'})
+  }}
 
 export default validate;

@@ -38,7 +38,7 @@ const Role = Object.freeze({
     NUCLEI: 'NUCLEI'
   });
   
-  module.exports = {
+  export {
     Role,
     TargetEnvironment,
     ScanStatus,
