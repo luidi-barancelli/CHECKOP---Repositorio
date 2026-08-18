@@ -14,3 +14,7 @@ export const loginSchema = z.object({
   email: z.string().trim().toLowerCase().email('E-mail inválido.'),
   password: z.string().min(1, 'Senha é obrigatória.'),
 });
+
+export const googleLoginSchema = z.object({
+  credential: z.string().min(1, 'Credencial do Google é obrigatória.'),
+});

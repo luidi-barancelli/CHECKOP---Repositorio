@@ -3,13 +3,14 @@ CREATE TABLE "User" (
     "id" TEXT NOT NULL PRIMARY KEY,
     "name" TEXT NOT NULL,
     "email" TEXT NOT NULL,
-    "password" TEXT NOT NULL,
+    "password" TEXT,
     "role" TEXT NOT NULL DEFAULT 'DEV',
     "googleId" TEXT,
     "resetPasswordToken" TEXT,
     "resetPasswordExpires" DATETIME,
     "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updatedAt" DATETIME NOT NULL
+    "updatedAt" DATETIME NOT NULL,
+    CONSTRAINT "password_or_google_required" CHECK ("password" IS NOT NULL OR "googleId" IS NOT NULL)
 );
 
 -- CreateTable
